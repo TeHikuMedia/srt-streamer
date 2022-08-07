@@ -21,10 +21,26 @@ install:
 
 
 docker-build:
-	docker buildx build -f Dockerfile.base . -t axia_streamer --platform linux/amd64,linux/arm64
+	docker build \
+	-f Dockerfile.base . -t axia_streamer
 
 docker-push:
 	docker buildx build -f Dockerfile.base . -t docker.io/kmahelona/axia-to-icecast --platform linux/amd64,linux/arm64 --push
+
+docker-interact:
+	docker run \
+	--network="host" \
+	--cap-add=NET_ADMIN \
+	--cap-add=NET_RAW \
+	-it \
+	--env AXIA_PORT \
+	--env ICE_USER \
+	--env ICE_PASS \
+	--env ICE_MNT \
+	--env ICE_URL \
+	--env ICE_PORT \
+	axia_streamer \
+	bash
 
 docker-run:
 	docker run \

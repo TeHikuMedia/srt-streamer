@@ -5,8 +5,7 @@ RUN apk add --no-cache --upgrade bash
 RUN apk add git
 RUN apk add ffmpeg
 RUN apk add python3
-
-RUN git clone --branch v1.5.0 https://github.com/Haivision/srt.git
+RUN apk add iptables
 
 RUN mkdir /opt/stream
 WORKDIR /opt/stream
