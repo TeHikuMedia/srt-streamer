@@ -30,6 +30,7 @@ if 'windows' in platform.lower():
     print("Windows")
     RTPDUMP_BIN = 'windows\\rtpdump.exe'
     PLAY_BIN = 'windows\\play.exe'
+    BASE_IP = bytes(BASE_IP)
 else:
     print(platform)
     RTPDUMP_BIN = 'rtpdump'
