@@ -5,11 +5,8 @@ import socket
 import platform
 import struct
 
-AXIA_IP = '10.2.160.0'
-BASE_IP = socket.inet_aton(AXIA_IP)
 
-# Windows sucks and things bytes are strings so hard coding this.
-MULTI_CAST_ADDRESS = 167944192
+BASE_AXIA_IP = 0xEFC00000  # 239.192.0.0 [in hex]
 
 
 def ipToDecimal(originalIp):
@@ -32,30 +29,26 @@ if 'windows' in platform.lower():
     print("Windows")
     RTPDUMP_BIN = 'windows\\rtpdump.exe'
     PLAY_BIN = 'windows\\rtpplay.exe'
-    MULTI_CAST_ADDRESS = (
-        int(sys.argv[1]) +
-        167944192
-    )
 else:
     print(platform)
     RTPDUMP_BIN = 'rtpdump'
     PLAY_BIN = 'rtpplay'
-    MULTI_CAST_ADDRESS = (
-        int(sys.argv[1]) +
-        eval('0x' + BASE_IP.hex())
-    )
+
 
 if len(sys.argv) != 2:
     print("Please supply a valid Livewire channel number (1 - 32767). Correct usage: xplay 32767")
     sys.exit(1)
 else:
     # Axia channel number + base IP (239.192.0.0 [in hex])
-
+    MULTI_CAST_ADDRESS = (
+        int(sys.argv[1]) +
+        BASE_AXIA_IP
+    )
     print(
-        RTPDUMP_BIN + " -F payload " + hex(MULTI_CAST_ADDRESS) + "/5004 | " +
+        RTPDUMP_BIN + " -F payload " + MULTI_CAST_ADDRESS + "/5004 | " +
         PLAY_BIN + " -c 2 -r 48000 -b 24 -e signed-integer  -B -t raw -"
     )
     os.system(
-        RTPDUMP_BIN + " -F payload " + hex(MULTI_CAST_ADDRESS) + "/5004 | " +
+        RTPDUMP_BIN + " -F payload " + MULTI_CAST_ADDRESS + "/5004 | " +
         PLAY_BIN + " -"
     )
