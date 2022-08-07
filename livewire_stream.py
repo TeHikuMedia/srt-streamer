@@ -25,6 +25,7 @@ def decimalToIp(originalDecimal):
     return socket.inet_ntoa(ipStruct)
 
 
+print(platform.platform())
 if 'win' in platform.platform():
     print("windows")
     RTPDUMP_BIN = 'windows\rtpdump.exe'
