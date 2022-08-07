@@ -1,0 +1,28 @@
+from ubuntu:focal
+
+RUN apt update
+RUN apt install bash
+RUN apt install -y git
+RUN DEBIAN_FRONTEND=noninteractive apt install -y -q --force-yes ffmpeg
+RUN apt install -y python3
+RUN apt install -y iptables
+RUN apt install -y make gcc
+RUN apt install -y iputils-ping
+
+RUN mkdir /opt/stream
+WORKDIR /opt/stream
+
+RUN git clone https://github.com/irtlab/rtptools.git
+WORKDIR /opt/stream/rtptools
+RUN ./configure && make
+RUN make install
+
+
+WORKDIR /opt/stream
+COPY stream_to_ice.sh .
+COPY source.sdp .
+COPY calc_ip.py .
+
+RUN chmod a+x stream_to_ice.sh
+
+CMD bash /opt/stream/stream_to_ice.sh

@@ -1,3 +1,5 @@
+TYPE=alpine
+
 foo:
 	@echo "bar"
 
@@ -22,10 +24,10 @@ install:
 
 docker-build:
 	docker build \
-	-f Dockerfile.base . -t axia_streamer
+	-f Dockerfile.$(TYPE) . -t axia_streamer
 
 docker-push:
-	docker buildx build -f Dockerfile.base . -t docker.io/kmahelona/axia-to-icecast --platform linux/amd64,linux/arm64 --push
+	docker buildx build -f Dockerfile.$(TYPE) . -t docker.io/kmahelona/axia-to-icecast:$(TYPE) --platform linux/amd64,linux/arm64 --push
 
 docker-interact:
 	docker run \

@@ -2,16 +2,11 @@
 # This example takes a axia channel from rdp and streams to icecast
 
 # Need to add multicast support
-iptables -I INPUT -d 224.0.0.0/4 -j ACCEPT
-iptables -I FORWARD -d 224.0.0.0/4 -j ACCEPT
+#iptables -I INPUT -d 224.0.0.0/4 -j ACCEPT
+#iptables -I FORWARD -d 224.0.0.0/4 -j ACCEPT
 
 SOURCE_IP=$(python3 calc_ip.py $AXIA_PORT)
 sed -i "s/SOURCE_IP/$SOURCE_IP/" source.sdp
-
-ping -w 4 10.2.160.1
-ping -w 4 $SOURCE_IP
-
-cat source.sdp
 
 ffmpeg \
     -loglevel debug \
