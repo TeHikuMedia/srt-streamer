@@ -32,20 +32,25 @@ if 'windows' in platform.lower():
     print("Windows")
     RTPDUMP_BIN = 'windows\\rtpdump.exe'
     PLAY_BIN = 'windows\\rtpplay.exe'
-
+    MULTI_CAST_ADDRESS = (
+        int(sys.argv[1]) +
+        167944192
+    )
 else:
     print(platform)
     RTPDUMP_BIN = 'rtpdump'
     PLAY_BIN = 'rtpplay'
-    print(BASE_IP)
-    print('eval', eval('0x' + BASE_IP.hex()))
+    MULTI_CAST_ADDRESS = (
+        int(sys.argv[1]) +
+        eval('0x' + BASE_IP.hex())
+    )
 
 if len(sys.argv) != 2:
     print("Please supply a valid Livewire channel number (1 - 32767). Correct usage: xplay 32767")
     sys.exit(1)
 else:
     # Axia channel number + base IP (239.192.0.0 [in hex])
-    # multicastAddr = int(sys.argv[1]) + eval('0x' + BASE_IP.hex())  # 0x0a02a000
+
     print(
         RTPDUMP_BIN + " -F payload " + hex(MULTI_CAST_ADDRESS) + "/5004 | " +
         PLAY_BIN + " -c 2 -r 48000 -b 24 -e signed-integer  -B -t raw -"
