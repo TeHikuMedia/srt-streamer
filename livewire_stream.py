@@ -57,5 +57,5 @@ else:
     )
     os.system(
         RTPDUMP_BIN + " -F payload " + hex(MULTI_CAST_ADDRESS) + "/5004 | " +
-        PLAY_BIN + " -c 2 -r 48000 -b 24 -e signed-integer  -B -t raw -"
+        PLAY_BIN + " -"
     )
