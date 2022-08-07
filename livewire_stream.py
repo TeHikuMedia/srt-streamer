@@ -26,7 +26,7 @@ def decimalToIp(originalDecimal):
 
 
 print(platform.platform())
-if 'win' in platform.platform():
+if 'win' in platform.platform().lower():
     print("windows")
     RTPDUMP_BIN = 'windows\rtpdump.exe'
     PLAY_BIN = 'windows\play.exe'
