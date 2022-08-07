@@ -25,13 +25,13 @@ def decimalToIp(originalDecimal):
     return socket.inet_ntoa(ipStruct)
 
 
-print(platform.platform())
-if 'win' in platform.platform().lower():
-    print("windows")
-    RTPDUMP_BIN = 'windows\rtpdump.exe'
-    PLAY_BIN = 'windows\play.exe'
+platform = platform.platform()
+if 'windows' in platform.lower():
+    print("Windows")
+    RTPDUMP_BIN = 'windows\\rtpdump.exe'
+    PLAY_BIN = 'windows\\play.exe'
 else:
-    print(platform.platform())
+    print(platform)
     RTPDUMP_BIN = 'rtpdump'
     PLAY_BIN = 'play'
 
