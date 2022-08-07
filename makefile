@@ -18,3 +18,7 @@ install:
 	else \
 		echo "Platform not implemented"; \
 	fi;
+
+
+docker-build:
+	docker build -f Dockerfile.base .

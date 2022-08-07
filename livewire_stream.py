@@ -36,7 +36,7 @@ if 'windows' in platform.lower():
 else:
     print(platform)
     RTPDUMP_BIN = 'rtpdump'
-    PLAY_BIN = 'play'
+    PLAY_BIN = 'rtpplay'
     print(BASE_IP)
     print('eval', eval('0x' + BASE_IP.hex()))
 
