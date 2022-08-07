@@ -21,4 +21,14 @@ install:
 
 
 docker-build:
-	docker build -f Dockerfile.base .
+	docker build -f Dockerfile.base . -t axia_streamer
+
+docker-run:
+	docker run \
+	--env AXIA_PORT \
+	--env ICE_USER \
+	--env ICE_PASS \
+	--env ICE_MNT \
+	--env ICE_URL \
+	--env ICE_PORT \
+	axia_streamer

@@ -6,7 +6,6 @@ import ipaddress
 
 BASE_AXIA_IP = 0xEFC00000  # 239.192.0.0 [in hex]
 
-
 platform = platform.platform()
 if 'windows' in platform.lower():
     print("Windows")

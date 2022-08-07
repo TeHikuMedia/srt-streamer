@@ -1,10 +1,20 @@
 from alpine:3.15.5
 
 RUN apk update
+RUN apk add --no-cache --upgrade bash
 RUN apk add git
 RUN apk add ffmpeg
-RUN apk add sox
+RUN apk add python3
 
-RUN git clone --branch 1.22 https://github.com/irtlab/rtptools.git
 RUN git clone --branch v1.5.0 https://github.com/Haivision/srt.git
 
+RUN mkdir /opt/stream
+WORKDIR /opt/stream
+
+COPY stream_to_ice.sh .
+COPY source.sdp .
+COPY calc_ip.py .
+
+RUN chmod a+x stream_to_ice.sh
+
+CMD bash /opt/stream/stream_to_ice.sh

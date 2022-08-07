@@ -1,14 +1,13 @@
-# This example takes a axia channel from rdp and streams to icecast
+#/usr/bin/bash
 
-ICE_USER=user
-ICE_PASS=pass
-ICE_PORT=8000
-ICE_URL=icecast.com
-ICE_MNT=mount
+# This example takes a axia channel from rdp and streams to icecast
+SOURCE_IP=$(python3 calc_ip.py $AXIA_PORT)
+sed -i "s/SOURCE_IP/$SOURCE_IP/" source.sdp
 
 ffmpeg \
+    -loglevel quiet \
     -protocol_whitelist file,rtp,udp \
-    -i test.sdp \
+    -i source.sdp \
     -max_delay 500 \
     -c:a libvorbis \
     -b:a 96K \
