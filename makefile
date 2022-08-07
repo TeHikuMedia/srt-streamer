@@ -13,7 +13,7 @@ install:
 		make; \
 	elif [[ $$OSTYPE == "darwin"* ]]; then \
 		echo "MacOS"; \
-		brew update; \
+		brew update; \/us	
 		brew install srt ffmpeg rtptools sox; \
 	else \
 		echo "Platform not implemented"; \
