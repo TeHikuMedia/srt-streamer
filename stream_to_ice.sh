@@ -5,7 +5,7 @@ SOURCE_IP=$(python3 calc_ip.py $AXIA_PORT)
 sed -i "s/SOURCE_IP/$SOURCE_IP/" source.sdp
 
 ffmpeg \
-    -loglevel quiet \
+    -loglevel debug \
     -protocol_whitelist file,rtp,udp \
     -i source.sdp \
     -max_delay 500 \

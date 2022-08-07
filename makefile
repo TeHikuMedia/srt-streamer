@@ -21,7 +21,10 @@ install:
 
 
 docker-build:
-	docker build -f Dockerfile.base . -t axia_streamer
+	docker buildx build -f Dockerfile.base . -t axia_streamer --platform linux/amd64,linux/arm64
+
+docker-push:
+	docker buildx build -f Dockerfile.base . -t docker.io/kmahelona/axia-to-icecast --platform linux/amd64,linux/arm64 --push
 
 docker-run:
 	docker run \
