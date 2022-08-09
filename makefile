@@ -1,4 +1,4 @@
-TYPE=alpine
+TYPE=ubuntu
 
 foo:
 	@echo "bar"
