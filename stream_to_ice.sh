@@ -4,16 +4,15 @@
 # Need to add multicast support
 #iptables -I INPUT -d 224.0.0.0/4 -j ACCEPT
 #iptables -I FORWARD -d 224.0.0.0/4 -j ACCEPT
-
-source .env
-
+$PATH=/home/tehiku/srt-streamer/
+source $PATH/.env
 SOURCE_IP=$(python3 calc_ip.py $AXIA_PORT)
-sed -i "s/SOURCE_IP/$SOURCE_IP/" source.sdp
+sed -i "s/SOURCE_IP/$SOURCE_IP/" $PATH/source.sdp
 
 ffmpeg \
     -loglevel debug \
     -protocol_whitelist file,rtp,udp \
-    -i source.sdp \
+    -i $PATH/source.sdp \
     -max_delay 500 \
     -c:a libvorbis \
     -b:a 96K \
