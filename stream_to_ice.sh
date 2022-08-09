@@ -5,14 +5,17 @@
 #iptables -I INPUT -d 224.0.0.0/4 -j ACCEPT
 #iptables -I FORWARD -d 224.0.0.0/4 -j ACCEPT
 $BASE_PATH=/home/tehiku/srt-streamer
-source $BASE_PATH/.env
+
+cd $BASE_PATH
+
+source .env
 SOURCE_IP=$(python3 calc_ip.py $AXIA_PORT)
-sed -i "s/SOURCE_IP/$SOURCE_IP/" $BASE_PATH/source.sdp
+sed -i "s/SOURCE_IP/$SOURCE_IP/" source.sdp
 
 ffmpeg \
     -loglevel debug \
     -protocol_whitelist file,rtp,udp \
-    -i /home/tehiku/srt-streamer/source.sdp \
+    -i source.sdp \
     -max_delay 500 \
     -c:a libvorbis \
     -b:a 96K \
