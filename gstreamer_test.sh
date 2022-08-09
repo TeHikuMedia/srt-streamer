@@ -6,13 +6,11 @@ source .env
 MULTICAST_IP_ADDR=$(python3 calc_ip.py $AXIA_PORT)
 AUDIO_UDP_PORT=5004
 
-gst-launch-1.0 -e --gst-debug-level=2 -vvv udpsrc address=$MULTICAST_IP_ADDR port=$AUDIO_UDP_PORT  multicast-iface=eno2 \
+gst-launch-1.0 -e --gst-debug-level=2 udpsrc address=$MULTICAST_IP_ADDR port=$AUDIO_UDP_PORT  multicast-iface=eno2 \
 caps="application/x-rtp, media=(string)audio, clock-rate=(int)48000, encoding-name=(string)L24, \
 encoding-params=(string)1, payload=(int)96, channels=(int)2" \
 buffer-size=96 \
-! rtpjitterbuffer ! rtpL24depay \
-! audioconvert \
-! audio/x-raw-float, width=32, channels=2, rate=48000, signed=true \
-! vorbisenc \
-! oggmux \
+! rtpL24depay ! audioconvert
+! audio/x-raw-float, width=32, channels=2, rate=480000, signed=true \
+! vorbisenc ! oggmux \
 ! shout2send mount=/$ICE_MNT port=$ICE_PORT username=$ICE_USER password=$ICE_PASS ip=$ICE_URL
