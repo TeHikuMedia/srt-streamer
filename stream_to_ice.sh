@@ -4,7 +4,7 @@
 # Need to add multicast support
 #iptables -I INPUT -d 224.0.0.0/4 -j ACCEPT
 #iptables -I FORWARD -d 224.0.0.0/4 -j ACCEPT
-$BASE_PATH=/home/tehiku/srt-streamer/
+$BASE_PATH=/home/tehiku/srt-streamer
 source $BASE_PATH/.env
 SOURCE_IP=$(python3 calc_ip.py $AXIA_PORT)
 sed -i "s/SOURCE_IP/$SOURCE_IP/" $BASE_PATH/source.sdp
