@@ -12,7 +12,7 @@ sed -i "s/SOURCE_IP/$SOURCE_IP/" $BASE_PATH/source.sdp
 ffmpeg \
     -loglevel debug \
     -protocol_whitelist file,rtp,udp \
-    -i $BASE_PATH/source.sdp \
+    -i /home/tehiku/srt-streamer/source.sdp \
     -max_delay 500 \
     -c:a libvorbis \
     -b:a 96K \
