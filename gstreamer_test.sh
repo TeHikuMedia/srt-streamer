@@ -9,8 +9,9 @@ AUDIO_UDP_PORT=5004
 gst-launch-1.0 -e --gst-debug-level=2 udpsrc address=$MULTICAST_IP_ADDR port=$AUDIO_UDP_PORT  multicast-iface=eno2 \
 caps="application/x-rtp, media=(string)audio, clock-rate=(int)48000, encoding-name=(string)L24, \
 encoding-params=(string)1, payload=(int)96, channels=(int)2" \
-buffer-size=96 \
+#buffer-size=72 \
+! queue
 ! rtpL24depay ! audioconvert
-! audio/x-raw-float, width=32, channels=2, rate=480000, signed=true \
+! audio/x-raw, format=F32LE, layout=interleaved, channels=2, rate=480000, channel-mask=0x0000000000000003 \
 ! vorbisenc ! oggmux \
 ! shout2send mount=/$ICE_MNT port=$ICE_PORT username=$ICE_USER password=$ICE_PASS ip=$ICE_URL
