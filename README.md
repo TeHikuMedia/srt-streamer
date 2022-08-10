@@ -2,9 +2,6 @@
 
 Stream an Axia Livewire AoiP source to icecast2.
 
-Tested on Ubuntu 20.04. I could not get docker on Windows to access the Axia
-network even with `--network="host"` 
-
 ## tl;dr
 
 ```bash
@@ -22,6 +19,7 @@ What's happening:
 2. Run the docker with environment variables as shown above. 
    We run as a daemon and tell docker to always restart it. Essentially
    always running on reboots and failures.
+3. Tested on Ubuntu 20.04. I could not get docker on Windows to access the Axia network even with `--network="host"` 
 
 
 ## Network Configuration
