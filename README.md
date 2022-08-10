@@ -1,10 +1,35 @@
-# srt-streamer
+# Axia Livewire AoiP to Icecast2
 
-SRT streaming code for use in AXIA Livewire, and other Audio over IP AOIP networks in Linux.
+Stream an Axia Livewire AoiP source to icecast2.
 
-Code tested on Ubuntu 20.04
+Tested on Ubuntu 20.04. I could not get docker on Windows to access the Axia
+network even with `--network="host"` 
 
-# Network Configuration
+## tl;dr
+
+```bash
+docker pull kmahelona/axia-to-icecast
+docker run -d \
+  --restart always \
+  --network="host" \
+  --name axia_to_icecast  
+  --env AXIA_PORT=axia_port_number \
+  --env ICE_USER=icecast_user \
+  --env ICE_URL=icecast_url \
+  --env ICE_MNT=mount_name \
+  --env ICE_PASS=icecast_password \
+  --env ICE_PORT=icecast_port \
+  kmahelona/axia-to-icecast
+docker update --restart always axia_to_icecast
+```
+What's happening:
+1. Pull the docker
+2. Run the docker with environment variables as shown above. 
+   We run as a daemon and tell docker to always restart it. Essentially
+   always running on reboots and failures.
+
+
+## Network Configuration
 It's important to properly connect your linux machine to the Axia audio network. Here's a copy of 
 our netplan for the ethernet device (eno2) connected to our Axia network.
 
