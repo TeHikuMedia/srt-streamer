@@ -14,4 +14,4 @@ encoding-params=(string)1, payload=(int)96, channels=(int)2" \
 ! audioconvert \
 ! audio/x-raw,rate=48000,format=S16LE,channels=2,layout=interleaved \
 ! opusenc ! oggmux \
-! shout2send mount=/$ICE_MNT port=$ICE_PORT username=$ICE_USER password=$ICE_PASS ip=$ICE_URL
+! shout2send mount=/$ICE_MNT port=$ICE_PORT username=$ICE_USER password=$ICE_PASS_GST ip=$ICE_URL
