@@ -12,7 +12,7 @@ docker pull kmahelona/axia-to-icecast
 docker run -d \
   --restart always \
   --network="host" \
-  --name axia_to_icecast  
+  --name axia_to_icecast \
   --env AXIA_PORT=axia_port_number \
   --env ICE_USER=icecast_user \
   --env ICE_URL=icecast_url \
