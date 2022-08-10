@@ -16,9 +16,8 @@ docker run -d \
 ```
 What's happening:
 1. Pull the docker
-2. Run the docker with environment variables as shown above. 
-   We run as a daemon and tell docker to always restart it. Essentially
-   always running on reboots and failures.
+2. Run the docker with environment variables defined in template.env (you have to update these). 
+   Run as a daemon and tell docker to always restart it, essentially always running on reboots and failures.
 3. Tested on Ubuntu 20.04. I could not get docker on Windows to access the Axia network even with `--network="host"` 
 
 
