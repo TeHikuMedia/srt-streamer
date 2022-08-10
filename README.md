@@ -1,6 +1,51 @@
 # srt-streamer
 
-SRT streaming code for use in AXIA Livewire, and other Audio over IP AOIP networks.
+SRT streaming code for use in AXIA Livewire, and other Audio over IP AOIP networks in Linux.
+
+Code tested on Ubuntu 20.04
+
+# Network Configuration
+It's important to properly connect your linux machine to the Axia audio network. Here's a copy of 
+our netplan for the ethernet device (eno2) connected to our Axia network.
+
+```yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eno2:
+      dhcp6: no
+      # Static IP, so dhcp is turned off
+      dhcp4: no
+      # This is the static IP for your linux machine.
+      # The /24 is the subnet
+      addresses:
+        - 10.2.160.52/24
+      # You need to set routes, otherwise you might have a
+      # situation where the linux machine tries to access
+      # the internet through your axia network, which for us
+      # doesn't work
+      # via: this is the gateway
+      # to: think of this as a catch all for your IP addresses
+      # in this case, we want our machine to send all IPs 
+      # in the range 10.2.160.0/24 to the gateway 10.2.160.99
+      # metric: sets a priority
+      routes:
+        - to: 10.2.160.0/24
+          via: 10.2.160.99
+          metric: 200
+        # Here we want all the possible IP addresses for the
+        # axia multicast IPs. For more info on the IP addresses
+        # taht Livewire use, see [here](https://github.com/anthonyeden/Axia-Livewire-Stream-Address-Helper).
+        - to: 239.192.0.0/16
+          via: 10.2.160.99
+          metric: 200
+        # To SEND multicast RTP packets to the Axia network, we have
+        # to set the scope to link.
+        - to: 239.192.0.0/16
+          scope: link
+```
+
 
 # Inspiration
 
