@@ -13,14 +13,8 @@ docker run -d \
   --restart always \
   --network="host" \
   --name axia_to_icecast \
-  --env AXIA_PORT=axia_port_number \
-  --env ICE_USER=icecast_user \
-  --env ICE_URL=icecast_url \
-  --env ICE_MNT=mount_name \
-  --env ICE_PASS=icecast_password \
-  --env ICE_PORT=icecast_port \
+  --env-file template.env
   kmahelona/axia-to-icecast
-docker update --restart always axia_to_icecast
 ```
 What's happening:
 1. Pull the docker
