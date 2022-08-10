@@ -35,8 +35,7 @@ network:
           via: 10.2.160.99
           metric: 200
         # Here we want all the possible IP addresses for the
-        # axia multicast IPs. For more info on the IP addresses
-        # taht Livewire use, see [here](https://github.com/anthonyeden/Axia-Livewire-Stream-Address-Helper).
+        # axia multicast IPs.
         - to: 239.192.0.0/16
           via: 10.2.160.99
           metric: 200
@@ -45,8 +44,12 @@ network:
         - to: 239.192.0.0/16
           scope: link
 ```
+For more info on the IP addresses that Livewire use, see [here](https://github.com/anthonyeden/Axia-Livewire-Stream-Address-Helper).
 
 
-# Inspiration
+# Inspiration / Helpful Links
 
 - https://github.com/kylophone/xplay
+- https://github.com/kylophone/a-look-at-livewire
+- https://mediarealm.com.au/articles/open-source-broadcast-software-github/
+- https://support.telosalliance.com/article/ewmogdoltp-calculating-a-multicast-address-from-livewire-channel-number
