@@ -13,7 +13,7 @@ docker run -d \
   --restart always \
   --network="host" \
   --name axia_to_icecast \
-  --env-file template.env
+  --env-file template.env \
   kmahelona/axia-to-icecast
 ```
 What's happening:
