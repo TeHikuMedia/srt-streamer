@@ -70,3 +70,4 @@ For more info on the IP addresses that Livewire use, see [here](https://github.c
 - https://github.com/kylophone/a-look-at-livewire
 - https://mediarealm.com.au/articles/open-source-broadcast-software-github/
 - https://support.telosalliance.com/article/ewmogdoltp-calculating-a-multicast-address-from-livewire-channel-number
+- Tricks to getting the rtp settings right https://github.com/openbroadcaster/obplayer/blob/48bdb82a46281d81b6dea5c4a9100edeb3a738ed/obplayer/streamer/rtsp.py#L54

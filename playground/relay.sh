@@ -6,7 +6,7 @@ source .env
 MULTICAST_IP_ADDR=$(python3 calc_ip.py $AXIA_PORT)
 AUDIO_UDP_PORT=5004
 
-SEND_ADDR=$(python3 calc_ip.py 17009)
+SEND_ADDR=$(python3 calc_ip.py 18001)
 
 echo $MULTICAST_IP_ADDR
 echo $SEND_ADDR
@@ -21,4 +21,31 @@ echo $SEND_ADDR
 #78
 
 
-gst-launch-1.0 udpsrc address=239.192.65.61 port=5004 ! udpsink host=239.192.70.79 port=5004
+# gst-launch-1.0 udpsrc address=239.192.65.61 port=5004 ! queue ! udpsink host=239.192.66.115 port=5004
+# ! audio/x-raw,rate=48000,format=S24BE,channels=2 \
+# ! audioresample ! audio/x-raw, rate=48000
+
+#win!
+# gst-launch-1.0 souphttpsrc location=http://libreice.tehiku.radio:8000/tehikufm_ogg \
+# ! queue \
+# ! oggdemux \
+# ! vorbisdec \
+# ! audioconvert \
+# ! volume volume=1.0 ! level \
+# ! audioresample ! audio/x-raw, rate=48000 \
+# ! audioconvert \
+# ! queue \
+# ! rtpL24pay name=pay0 pt=96 max-ptime=1000000 \
+# ! udpsink host=$SEND_ADDR port=5004
+
+gst-launch-1.0 souphttpsrc location=http://libreice.tehiku.radio:8000/tehikufm_ogg \
+! queue \
+! oggdemux \
+! vorbisdec \
+! volume volume=0.5 ! level \
+! audioresample \
+! audioconvert \
+! capsfilter caps="audio/x-raw,rate=48000,channels=2" \
+! queue2 \
+! rtpL24pay name=gstreamer_linux pt=96 max-ptime=1000000 \
+! udpsink host=$SEND_ADDR port=5004
