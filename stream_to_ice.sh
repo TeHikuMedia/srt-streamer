@@ -20,5 +20,5 @@ ffmpeg \
     -b:a 96K \
     -content_type 'audio/aac' \
     -vn \
-    -f mp4 \
+    -f aac \
     icecast://$ICE_USER:$ICE_PASS@$ICE_URL:$ICE_PORT/$ICE_MNT
