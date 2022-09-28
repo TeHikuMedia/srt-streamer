@@ -16,9 +16,8 @@ docker run -d \
 ```
 What's happening:
 1. Pull the docker
-2. Run the docker with environment variables as shown above. 
-   We run as a daemon and tell docker to always restart it. Essentially
-   always running on reboots and failures.
+2. Run the docker with environment variables defined in template.env (you have to update these). 
+   Run as a daemon and tell docker to always restart it, essentially always running on reboots and failures.
 3. Tested on Ubuntu 20.04. I could not get docker on Windows to access the Axia network even with `--network="host"` 
 
 
@@ -71,3 +70,4 @@ For more info on the IP addresses that Livewire use, see [here](https://github.c
 - https://github.com/kylophone/a-look-at-livewire
 - https://mediarealm.com.au/articles/open-source-broadcast-software-github/
 - https://support.telosalliance.com/article/ewmogdoltp-calculating-a-multicast-address-from-livewire-channel-number
+- Tricks to getting the rtp settings right https://github.com/openbroadcaster/obplayer/blob/48bdb82a46281d81b6dea5c4a9100edeb3a738ed/obplayer/streamer/rtsp.py#L54
