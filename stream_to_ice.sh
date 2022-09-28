@@ -16,9 +16,9 @@ ffmpeg \
     -protocol_whitelist file,rtp,udp \
     -i /tmp/stream_to_ice.sdp \
     -max_delay 500 \
-    -c:a libvorbis \
+    -c:a aac \
     -b:a 96K \
-    -content_type 'audio/ogg' \
+    -content_type 'audio/aac' \
     -vn \
-    -f opus \
+    -f mp4 \
     icecast://$ICE_USER:$ICE_PASS@$ICE_URL:$ICE_PORT/$ICE_MNT
